@@ -11,9 +11,9 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-		20809A2D30347F4500C4FC50 /* DataOriantedContentReader */ = {
+		20809A2D30347F4500C4FC50 /* HaberPulse */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
-			path = DataOriantedContentReader;
+			path = HaberPulse;
 			sourceTree = "<group>";
 		};
 /* End PBXFileSystemSynchronizedRootGroup section */
@@ -32,7 +32,7 @@
 		20809A2230347F4500C4FC50 = {
 			isa = PBXGroup;
 			children = (
-				20809A2D30347F4500C4FC50 /* DataOriantedContentReader */,
+				20809A2D30347F4500C4FC50 /* HaberPulse */,
 				20809A2C30347F4500C4FC50 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -61,7 +61,7 @@
 			dependencies = (
 			);
 			fileSystemSynchronizedGroups = (
-				20809A2D30347F4500C4FC50 /* DataOriantedContentReader */,
+				20809A2D30347F4500C4FC50 /* HaberPulse */,
 			);
 			name = HaberPulse;
 			packageProductDependencies = (
@@ -85,7 +85,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 20809A2630347F4500C4FC50 /* Build configuration list for PBXProject "HaberPulse" */;
+			buildConfigurationList = 20809A2630347F4500C4FC50 /* Build configuration list for PBXProject "DataOriantedContentReader" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -254,6 +254,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = HaberPulse;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -264,8 +265,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				INFOPLIST_KEY_CFBundleDisplayName = HaberPulse;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.alikagan.HaberPulse";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alikagan.HaberPulse;
 				PRODUCT_NAME = HaberPulse;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -285,6 +285,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = HaberPulse;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -295,8 +296,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				INFOPLIST_KEY_CFBundleDisplayName = HaberPulse;
-				PRODUCT_BUNDLE_IDENTIFIER = "com.alikagan.HaberPulse";
+				PRODUCT_BUNDLE_IDENTIFIER = com.alikagan.HaberPulse;
 				PRODUCT_NAME = HaberPulse;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
@@ -310,7 +310,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		20809A2630347F4500C4FC50 /* Build configuration list for PBXProject "HaberPulse" */ = {
+		20809A2630347F4500C4FC50 /* Build configuration list for PBXProject "DataOriantedContentReader" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				20809A3930347F4700C4FC50 /* Debug */,

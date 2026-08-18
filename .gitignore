@@ -1,8 +1,8 @@
-# DataOriantedContentReader — .gitignore
+# HaberPulse — .gitignore
 
 # ─── Gizli Dosyalar ───────────────────────────────────────────────────────────
 # API key ve diğer sırlar — asla commit etme!
-DataOriantedContentReader/App/Secrets.swift
+HaberPulse/App/Secrets.swift
 *.xcconfig
 !*.xcconfig.example
 
