@@ -1,7 +1,3 @@
-// HistoryView.swift
-// DataOriantedContentReader
-// Features → History → Views
-
 import SwiftUI
 
 struct HistoryView: View {

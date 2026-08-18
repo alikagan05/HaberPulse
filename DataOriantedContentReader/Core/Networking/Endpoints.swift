@@ -1,19 +1,61 @@
-// Endpoints.swift
-// DataOriantedContentReader
-// Core → Networking
-
 import Foundation
 
-/// The Guardian Open Platform API endpoint builder.
-/// Replace `apiKey` with your key from https://open-platform.theguardian.com/access/
 enum Endpoints {
-
-    // MARK: - Configuration
-    static let apiKey   = Secrets.guardianAPIKey  // App/Secrets.swift (gitignored)
+    static let apiKey   = Secrets.guardianAPIKey
     static let baseURL  = "https://content.guardianapis.com"
     static let pageSize = 20
 
-    // MARK: - Available Sections
+    static let sources: [NewsSource] = [
+        NewsSource(
+            id: "all",
+            name: "source_all",
+            language: "all",
+            feedURL: nil,
+            defaultSection: "Gündem",
+            iconName: "globe"
+        ),
+        NewsSource(
+            id: "guardian",
+            name: "The Guardian",
+            language: "en",
+            feedURL: nil,
+            defaultSection: "world",
+            iconName: "newspaper"
+        ),
+        NewsSource(
+            id: "trt_gundem",
+            name: "TRT Haber",
+            language: "tr",
+            feedURL: URL(string: "https://www.trthaber.com/gundem_articles.rss"),
+            defaultSection: "Gündem",
+            iconName: "flame"
+        ),
+        NewsSource(
+            id: "bbcturkce",
+            name: "BBC Türkçe",
+            language: "tr",
+            feedURL: URL(string: "https://feeds.bbci.co.uk/turkce/rss.xml"),
+            defaultSection: "Dünya",
+            iconName: "globe.europe.africa"
+        ),
+        NewsSource(
+            id: "ntv_gundem",
+            name: "NTV",
+            language: "tr",
+            feedURL: URL(string: "https://www.ntv.com.tr/gundem.rss"),
+            defaultSection: "Gündem",
+            iconName: "bolt"
+        ),
+        NewsSource(
+            id: "webtekno",
+            name: "Webtekno",
+            language: "tr",
+            feedURL: URL(string: "https://www.webtekno.com/rss.xml"),
+            defaultSection: "Teknoloji",
+            iconName: "cpu"
+        ),
+    ]
+
     static let sections: [(id: String, label: String)] = [
         ("", "all"),
         ("world", "world"),
@@ -28,9 +70,6 @@ enum Endpoints {
         ("education", "education"),
     ]
 
-    // MARK: - Endpoint Builders
-
-    /// Fetches articles for the main feed with optional section filter.
     static func feed(
         section: String = "",
         page: Int = 1,
@@ -46,7 +85,6 @@ enum Endpoints {
         )
     }
 
-    /// Searches articles by a text query.
     static func search(
         query: String,
         section: String = "",
@@ -62,7 +100,6 @@ enum Endpoints {
         )
     }
 
-    // MARK: - Private Builder
     private static func build(
         query: String,
         section: String,

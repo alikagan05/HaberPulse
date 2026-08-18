@@ -1,7 +1,3 @@
-// FilterSheetView.swift
-// DataOriantedContentReader
-// Features → Feed → Views
-
 import SwiftUI
 
 struct FilterSheetView: View {
@@ -12,7 +8,6 @@ struct FilterSheetView: View {
 
     @Environment(\.dismiss) private var dismiss
 
-    // Local state for sheet editing
     @State private var localSection: String
     @State private var localFromDate: Date
     @State private var localToDate: Date
@@ -39,7 +34,6 @@ struct FilterSheetView: View {
     var body: some View {
         NavigationStack {
             Form {
-                // MARK: Section Filter
                 Section {
                     ScrollView(.horizontal, showsIndicators: false) {
                         HStack(spacing: 8) {
@@ -69,7 +63,6 @@ struct FilterSheetView: View {
                     Text(NSLocalizedString("filter_section", comment: ""))
                 }
 
-                // MARK: Date Filters
                 Section {
                     Toggle(NSLocalizedString("filter_from_date", comment: ""), isOn: $useFromDate.animation())
                     if useFromDate {
@@ -98,7 +91,6 @@ struct FilterSheetView: View {
                     Text(NSLocalizedString("filter_date_range", comment: ""))
                 }
 
-                // MARK: Reset
                 Section {
                     Button(role: .destructive) {
                         localSection  = ""

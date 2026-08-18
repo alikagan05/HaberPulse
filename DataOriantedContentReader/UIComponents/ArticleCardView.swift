@@ -1,18 +1,19 @@
-// ArticleCardView.swift
-// DataOriantedContentReader
-// UIComponents
-
 import SwiftUI
 
-/// Thumbnail, başlık, section badge ve meta bilgilerini gösteren kart bileşeni.
 struct ArticleCardView: View {
     let article: Article
     var isBookmarked: Bool = false
     var onBookmark: (() -> Void)? = nil
 
+    var displayTitle: String {
+        if LanguageManager.shared.isTurkish, let translated = article.translatedTitle, !translated.isEmpty {
+            return translated
+        }
+        return article.webTitle
+    }
+
     var body: some View {
         VStack(alignment: .leading, spacing: 0) {
-            // Thumbnail
             if let url = article.thumbnailURL {
                 AsyncImage(url: url) { phase in
                     switch phase {
@@ -31,25 +32,31 @@ struct ArticleCardView: View {
                 .clipped()
             }
 
-            // Content
             VStack(alignment: .leading, spacing: 10) {
-                // Section + Date
-                HStack {
+                HStack(spacing: 6) {
+                    Text(article.sourceName)
+                        .font(.caption2.weight(.bold))
+                        .padding(.horizontal, 7)
+                        .padding(.vertical, 3)
+                        .background(Color.brandPrimary.opacity(0.12))
+                        .foregroundStyle(Color.brandPrimary)
+                        .clipShape(Capsule())
+
                     SectionBadge(name: article.sectionName)
+
                     Spacer()
+
                     Text(article.webPublicationDate.relativeFormatted)
                         .font(.caption)
                         .foregroundStyle(.secondary)
                 }
 
-                // Title
-                Text(article.webTitle)
+                Text(displayTitle)
                     .font(.headline)
                     .foregroundStyle(.primary)
                     .lineLimit(3)
                     .fixedSize(horizontal: false, vertical: true)
 
-                // Trail text
                 if !article.cleanTrailText.isEmpty {
                     Text(article.cleanTrailText)
                         .font(.subheadline)
@@ -57,7 +64,6 @@ struct ArticleCardView: View {
                         .lineLimit(2)
                 }
 
-                // Footer: byline + read time + bookmark
                 HStack {
                     if !article.displayByline.isEmpty {
                         Text(article.displayByline)
@@ -67,7 +73,6 @@ struct ArticleCardView: View {
                     }
                     Spacer()
 
-                    // Read time
                     Label(
                         "\(article.estimatedReadTime) dk",
                         systemImage: "clock"
@@ -75,7 +80,6 @@ struct ArticleCardView: View {
                     .font(.caption)
                     .foregroundStyle(.secondary)
 
-                    // Bookmark button
                     if let onBookmark {
                         Button(action: onBookmark) {
                             Image(systemName: isBookmarked ? "bookmark.fill" : "bookmark")
@@ -104,8 +108,6 @@ struct ArticleCardView: View {
             }
     }
 }
-
-// MARK: - Section Badge
 
 struct SectionBadge: View {
     let name: String

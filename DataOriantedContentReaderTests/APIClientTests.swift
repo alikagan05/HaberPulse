@@ -1,25 +1,16 @@
-// APIClientTests.swift
-// DataOriantedContentReaderTests
-
 import XCTest
-@testable import DataOriantedContentReader
+@testable import HaberPulse
 
 final class APIClientTests: XCTestCase {
-
-    // MARK: - Mock URLSession
-
-    /// Mock URLSession'ı simüle eden yapı.
     private func makeMockSession(data: Data, statusCode: Int) -> URLSession {
         let config = URLSessionConfiguration.ephemeral
         config.protocolClasses = []
         return URLSession(configuration: config)
     }
 
-    // MARK: - Endpoints Tests
-
     func test_endpoints_feedURL_isValid() {
         let url = Endpoints.feed(section: "technology", page: 1)
-        XCTAssertNotNil(url, "Feed URL should not be nil")
+        XCTAssertNotNil(url)
         XCTAssertTrue(url?.absoluteString.contains("section=technology") == true)
         XCTAssertTrue(url?.absoluteString.contains("page=1") == true)
         XCTAssertTrue(url?.absoluteString.contains("api-key=") == true)
@@ -48,8 +39,6 @@ final class APIClientTests: XCTestCase {
         XCTAssertFalse(url?.absoluteString.contains("section=") == true)
     }
 
-    // MARK: - NetworkError Tests
-
     func test_networkError_equatable() {
         XCTAssertEqual(NetworkError.noInternet, NetworkError.noInternet)
         XCTAssertEqual(NetworkError.timeout, NetworkError.timeout)
@@ -66,7 +55,7 @@ final class APIClientTests: XCTestCase {
             .unknown("test"),
         ]
         for error in errors {
-            XCTAssertNotNil(error.errorDescription, "\(error) should have a description")
+            XCTAssertNotNil(error.errorDescription)
         }
     }
 }

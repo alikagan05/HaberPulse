@@ -1,26 +1,17 @@
-// BookmarksViewModel.swift
-// DataOriantedContentReader
-// Features → Bookmarks → ViewModels
-
 import Foundation
-import Combine    // ← SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY için gerekli
+import Combine
 import CoreData
+import OSLog
 
 @MainActor
 final class BookmarksViewModel: ObservableObject {
-
-    // MARK: - Published
     @Published var bookmarkedArticles: [Article] = []
 
-    // MARK: - Dependencies
     private let persistence: PersistenceController
 
-    // MARK: - Init
     init() {
         self.persistence = AppEnvironment.shared.persistence
     }
-
-    // MARK: - Public Methods
 
     func loadBookmarks() {
         let req = SavedArticle.fetchRequest()

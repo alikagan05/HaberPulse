@@ -1,37 +1,60 @@
-// FeedView.swift
-// DataOriantedContentReader
-// Features → Feed → Views
-
 import SwiftUI
 
 struct FeedView: View {
     @StateObject private var vm = FeedViewModel()
+    @ObservedObject private var langManager = LanguageManager.shared
+    @Environment(\.scenePhase) private var scenePhase
 
     var body: some View {
         NavigationStack {
-            Group {
-                if vm.isLoading && vm.articles.isEmpty {
-                    LoadingView()
-                } else if let error = vm.error, vm.articles.isEmpty {
-                    ErrorView(error: error) {
-                        await vm.loadFeed()
+            VStack(spacing: 0) {
+                sourceSelectorBar
+
+                Group {
+                    if vm.isLoading && vm.articles.isEmpty {
+                        LoadingView()
+                    } else if let error = vm.error, vm.articles.isEmpty {
+                        ErrorView(error: error) {
+                            await vm.loadFeed()
+                        }
+                    } else if vm.articles.isEmpty {
+                        EmptyStateView(
+                            icon: "newspaper",
+                            title: NSLocalizedString("feed_empty_title", comment: ""),
+                            subtitle: NSLocalizedString("feed_empty_subtitle", comment: ""),
+                            action: { vm.resetFilters(); Task { await vm.loadFeed() } },
+                            actionTitle: NSLocalizedString("filter_reset", comment: "")
+                        )
+                    } else {
+                        articleList
                     }
-                } else if vm.articles.isEmpty {
-                    EmptyStateView(
-                        icon: "newspaper",
-                        title: NSLocalizedString("feed_empty_title", comment: ""),
-                        subtitle: NSLocalizedString("feed_empty_subtitle", comment: ""),
-                        action: { vm.resetFilters(); Task { await vm.loadFeed() } },
-                        actionTitle: NSLocalizedString("filter_reset", comment: "")
-                    )
-                } else {
-                    articleList
                 }
             }
             .navigationTitle(NSLocalizedString("tab_feed", comment: ""))
             .toolbar {
-                ToolbarItem(placement: .navigationBarTrailing) {
-                    filterButton
+                ToolbarItem(placement: .navigationBarLeading) {
+                    Button {
+                        withAnimation {
+                            langManager.toggleLanguage()
+                        }
+                    } label: {
+                        HStack(spacing: 4) {
+                            Image(systemName: "globe")
+                            Text(langManager.currentLanguage.shortLabel)
+                                .font(.caption.weight(.bold))
+                        }
+                        .padding(.horizontal, 8)
+                        .padding(.vertical, 4)
+                        .background(Color.brandPrimary.opacity(0.15))
+                        .foregroundStyle(Color.brandPrimary)
+                        .clipShape(Capsule())
+                    }
+                }
+
+                if vm.selectedSource.id == "guardian" {
+                    ToolbarItem(placement: .navigationBarTrailing) {
+                        filterButton
+                    }
                 }
             }
             .sheet(isPresented: $vm.showFilterSheet) {
@@ -50,14 +73,54 @@ struct FeedView: View {
         .task {
             await vm.loadFeed()
         }
+        .onChange(of: scenePhase) { _, newPhase in
+            if newPhase == .active {
+                Task {
+                    await vm.refreshIfStale()
+                }
+            }
+        }
     }
 
-    // MARK: - Article List
+    private var sourceSelectorBar: some View {
+        ScrollView(.horizontal, showsIndicators: false) {
+            HStack(spacing: 8) {
+                ForEach(vm.sources) { source in
+                    let isSelected = vm.selectedSourceId == source.id
+                    Button {
+                        vm.selectSource(source.id)
+                    } label: {
+                        HStack(spacing: 5) {
+                            Image(systemName: source.iconName)
+                                .font(.caption2)
+                            Text(source.id == "all" ? NSLocalizedString(source.name, comment: "") : source.name)
+                                .font(Font.caption.weight(isSelected ? .semibold : .regular))
+                        }
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 7)
+                        .background(
+                            isSelected
+                                ? Color.brandPrimary
+                                : Color(.secondarySystemGroupedBackground)
+                        )
+                        .foregroundStyle(isSelected ? Color.white : Color.primary)
+                        .clipShape(Capsule())
+                        .shadow(color: Color.black.opacity(0.04), radius: 3, x: 0, y: 1)
+                    }
+                    .buttonStyle(.plain)
+                    .animation(.easeInOut(duration: 0.2), value: vm.selectedSourceId)
+                }
+            }
+            .padding(.horizontal)
+            .padding(.vertical, 8)
+        }
+        .background(Color(.systemGroupedBackground))
+    }
+
     private var articleList: some View {
         ScrollView {
             LazyVStack(spacing: 16) {
-                // Section pill indicator
-                if !vm.selectedSection.isEmpty {
+                if !vm.selectedSection.isEmpty && vm.selectedSource.id == "guardian" {
                     activeSectionBanner
                 }
 
@@ -72,7 +135,6 @@ struct FeedView: View {
                     }
                     .buttonStyle(.plain)
                     .onAppear {
-                        // Sonsuz kaydırma: son 3 elemandan biri görününce yükle
                         if article.id == vm.articles.suffix(3).first?.id {
                             Task { await vm.loadMore() }
                         }
@@ -98,7 +160,6 @@ struct FeedView: View {
         .background(Color(.systemGroupedBackground))
     }
 
-    // MARK: - Active Section Banner
     private var activeSectionBanner: some View {
         HStack {
             SectionBadge(name: vm.selectedSection.isEmpty ? "all" : vm.selectedSection)
@@ -122,7 +183,6 @@ struct FeedView: View {
         .padding(.horizontal)
     }
 
-    // MARK: - Filter Button
     private var filterButton: some View {
         Button {
             vm.showFilterSheet = true
@@ -136,8 +196,4 @@ struct FeedView: View {
     private var hasActiveFilters: Bool {
         !vm.selectedSection.isEmpty || vm.fromDate != nil || vm.toDate != nil
     }
-}
-
-#Preview {
-    FeedView()
 }

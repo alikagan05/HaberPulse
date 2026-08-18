@@ -1,7 +1,3 @@
-// EmptyStateView.swift
-// DataOriantedContentReader
-// UIComponents
-
 import SwiftUI
 
 struct EmptyStateView: View {

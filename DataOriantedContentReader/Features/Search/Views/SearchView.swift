@@ -1,7 +1,3 @@
-// SearchView.swift
-// DataOriantedContentReader
-// Features → Search → Views
-
 import SwiftUI
 
 struct SearchView: View {
@@ -10,7 +6,6 @@ struct SearchView: View {
     var body: some View {
         NavigationStack {
             VStack(spacing: 0) {
-                // Section filter chips
                 sectionChips
 
                 Group {
@@ -44,7 +39,6 @@ struct SearchView: View {
         }
     }
 
-    // MARK: - Section Chips
     private var sectionChips: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 8) {
@@ -77,7 +71,6 @@ struct SearchView: View {
         .background(Color(.systemGroupedBackground))
     }
 
-    // MARK: - Results List
     private var resultsList: some View {
         List {
             ForEach(vm.results) { article in
@@ -110,7 +103,6 @@ struct SearchView: View {
         }
     }
 
-    // MARK: - Search Prompt
     private var searchPrompt: some View {
         VStack(spacing: 20) {
             Image(systemName: "doc.text.magnifyingglass")

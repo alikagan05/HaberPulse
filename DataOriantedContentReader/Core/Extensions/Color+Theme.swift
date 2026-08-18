@@ -1,16 +1,6 @@
-// Color+Theme.swift
-// DataOriantedContentReader
-// Core → Extensions
-
 import SwiftUI
 
 extension Color {
-    // MARK: - Section Badge Colors
-    // Not: brandPrimary ve brandSecondary, Assets.xcassets'ten
-    // ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS=YES
-    // tarafından otomatik üretildiği için burada tanımlanmıyor (redeclaration hatası).
-    // Color.brandPrimary doğrudan kullanılabilir.
-
     static func sectionColor(_ section: String) -> Color {
         switch section.lowercased() {
         case "technology":   return Color(hue: 0.60, saturation: 0.7, brightness: 0.85)

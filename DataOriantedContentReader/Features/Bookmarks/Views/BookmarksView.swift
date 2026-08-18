@@ -1,7 +1,3 @@
-// BookmarksView.swift
-// DataOriantedContentReader
-// Features → Bookmarks → Views
-
 import SwiftUI
 
 struct BookmarksView: View {

@@ -1,15 +1,9 @@
-// FeedViewModelTests.swift
-// DataOriantedContentReaderTests
-
 import XCTest
-@testable import DataOriantedContentReader
+@testable import HaberPulse
 
 @MainActor
 final class FeedViewModelTests: XCTestCase {
-
-    // MARK: - Helpers
-
-    private func makeArticle(id: String = "test/1", section: String = "technology") -> Article {
+    private func makeArticle(id: String = "test/1", section: String = "technology", source: String = "The Guardian") -> Article {
         Article(
             apiId: id,
             webTitle: "Test Başlığı",
@@ -21,11 +15,11 @@ final class FeedViewModelTests: XCTestCase {
                 thumbnail: nil,
                 trailText: "Kısa özet",
                 byline: "Test Yazar"
-            )
+            ),
+            sourceName: source,
+            isTurkish: source != "The Guardian"
         )
     }
-
-    // MARK: - Article Model Tests
 
     func test_article_estimatedReadTime_atLeastOne() {
         let article = makeArticle()
@@ -46,7 +40,7 @@ final class FeedViewModelTests: XCTestCase {
                 byline: nil
             )
         )
-        XCTAssertFalse(article.cleanTrailText.contains("<p>"), "Trail text should not contain HTML tags")
+        XCTAssertFalse(article.cleanTrailText.contains("<p>"))
     }
 
     func test_article_thumbnailURL_nil_whenNoThumbnail() {
@@ -67,7 +61,15 @@ final class FeedViewModelTests: XCTestCase {
         XCTAssertEqual(article.thumbnailURL?.absoluteString, urlString)
     }
 
-    // MARK: - String Extension Tests
+    func test_article_sourceName_and_isTurkish() {
+        let trtArticle = makeArticle(id: "trt/1", source: "TRT Haber")
+        XCTAssertEqual(trtArticle.sourceName, "TRT Haber")
+        XCTAssertTrue(trtArticle.isTurkish)
+
+        let guardianArticle = makeArticle(id: "guard/1", source: "The Guardian")
+        XCTAssertEqual(guardianArticle.sourceName, "The Guardian")
+        XCTAssertFalse(guardianArticle.isTurkish)
+    }
 
     func test_string_isBlank_trueForEmpty() {
         XCTAssertTrue("".isBlank)
@@ -83,8 +85,6 @@ final class FeedViewModelTests: XCTestCase {
         XCTAssertEqual("".estimatedReadTimeMinutes, 1)
         XCTAssertEqual("one".estimatedReadTimeMinutes, 1)
     }
-
-    // MARK: - Date Extension Tests
 
     func test_date_apiFormatted_correctFormat() {
         var components = DateComponents()

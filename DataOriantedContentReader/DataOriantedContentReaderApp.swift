@@ -1,27 +1,22 @@
-// DataOriantedContentReaderApp.swift
-// DataOriantedContentReader
-// App
-
 import SwiftUI
+import CoreData
 
 @main
-struct DataOriantedContentReaderApp: App {
+struct HaberPulseApp: App {
+    @ObservedObject private var langManager = LanguageManager.shared
 
-    // MARK: - Body
     var body: some Scene {
         WindowGroup {
             RootTabView()
-                // AppEnvironment.shared.persistence — nonisolated(unsafe) static let,
-                // her context'ten güvenle erişilir.
                 .environment(
                     \.managedObjectContext,
                      AppEnvironment.shared.persistence.container.viewContext
                 )
+                .environment(\.locale, langManager.locale)
+                .id(langManager.currentLanguageRaw)
         }
     }
 }
-
-// MARK: - Root Tab View
 
 struct RootTabView: View {
     var body: some View {

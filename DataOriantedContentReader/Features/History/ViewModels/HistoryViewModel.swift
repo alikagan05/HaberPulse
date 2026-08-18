@@ -1,28 +1,18 @@
-// HistoryViewModel.swift
-// DataOriantedContentReader
-// Features → History → ViewModels
-
 import Foundation
 import Combine
 import CoreData
-import OSLog   // ← SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY için açık import
+import OSLog
 
 @MainActor
 final class HistoryViewModel: ObservableObject {
-
-    // MARK: - Published
     @Published var readArticles: [Article] = []
     @Published var showClearAlert = false
 
-    // MARK: - Dependencies
     private let persistence: PersistenceController
 
-    // MARK: - Init
     init() {
         self.persistence = AppEnvironment.shared.persistence
     }
-
-    // MARK: - Public Methods
 
     func loadHistory() {
         let req = SavedArticle.fetchRequest()

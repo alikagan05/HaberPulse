@@ -14,8 +14,11 @@
         <attribute name="isBookmarked"     optional="NO"  attributeType="Boolean" defaultValueString="NO"  usesScalarValueType="YES"/>
         <attribute name="readAt"           optional="YES" attributeType="Date"    usesScalarValueType="NO"/>
         <attribute name="estimatedReadTime" optional="NO" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="YES"/>
+        <attribute name="sourceName"       optional="YES" attributeType="String"  defaultValueString="The Guardian"/>
+        <attribute name="translatedTitle"  optional="YES" attributeType="String"/>
+        <attribute name="translatedBody"   optional="YES" attributeType="String"/>
     </entity>
     <elements>
-        <element name="SavedArticle" positionX="-63" positionY="-18" width="128" height="230"/>
+        <element name="SavedArticle" positionX="-63" positionY="-18" width="128" height="280"/>
     </elements>
 </model>

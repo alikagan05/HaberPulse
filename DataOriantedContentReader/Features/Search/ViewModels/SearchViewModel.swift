@@ -1,39 +1,26 @@
-// SearchViewModel.swift
-// DataOriantedContentReader
-// Features → Search → ViewModels
-
 import Foundation
 import Combine
+import OSLog
 
 @MainActor
 final class SearchViewModel: ObservableObject {
-
-    // MARK: - Published
-    @Published var query        = ""
+    @Published var query: String = ""
+    @Published var selectedSection: String = ""
     @Published var results: [Article] = []
-    @Published var isLoading    = false
-    @Published var error: NetworkError?
-    @Published var selectedSection = ""
+    @Published var isLoading: Bool = false
+    @Published var error: NetworkError? = nil
 
-    // MARK: - Pagination
-    private var currentPage = 1
-    private var totalPages  = 1
-    var canLoadMore: Bool { currentPage < totalPages && !isLoading }
-
-    // MARK: - Debounce
+    private var currentPage: Int = 1
+    private var totalPages: Int = 1
     private var searchTask: Task<Void, Never>?
 
-    // MARK: - Dependencies
     private let apiClient: APIClient
     private let persistence: PersistenceController
 
-    // MARK: - Init
     init() {
         self.apiClient   = AppEnvironment.shared.apiClient
         self.persistence = AppEnvironment.shared.persistence
     }
-
-    // MARK: - Public Methods
 
     func onQueryChanged() {
         searchTask?.cancel()
@@ -42,7 +29,7 @@ final class SearchViewModel: ObservableObject {
             return
         }
         searchTask = Task {
-            try? await Task.sleep(for: .milliseconds(400))
+            try? await Task.sleep(nanoseconds: 400_000_000)
             guard !Task.isCancelled else { return }
             await search()
         }
@@ -53,6 +40,7 @@ final class SearchViewModel: ObservableObject {
         isLoading   = true
         error       = nil
         currentPage = 1
+
         defer { isLoading = false }
 
         guard let url = Endpoints.search(
@@ -68,6 +56,7 @@ final class SearchViewModel: ObservableObject {
             let response: GuardianResponse = try await apiClient.fetch(url)
             results    = response.response.results
             totalPages = response.response.pages
+            AppLogger.viewModel.info("Search '\(self.query)': \(self.results.count) results")
         } catch let netError as NetworkError {
             error = netError
         } catch {
@@ -76,18 +65,21 @@ final class SearchViewModel: ObservableObject {
     }
 
     func loadMore() async {
-        guard canLoadMore else { return }
+        guard currentPage < totalPages, !isLoading else { return }
         let nextPage = currentPage + 1
         guard let url = Endpoints.search(
             query: query,
             section: selectedSection,
             page: nextPage
         ) else { return }
+
         do {
             let response: GuardianResponse = try await apiClient.fetch(url)
-            results    += response.response.results
+            results += response.response.results
             currentPage = nextPage
-        } catch {}
+        } catch {
+            AppLogger.viewModel.error("Search loadMore failed: \(error.localizedDescription)")
+        }
     }
 
     func toggleBookmark(article: Article) {

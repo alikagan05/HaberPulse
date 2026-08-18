@@ -7,21 +7,22 @@
 "tab_bookmarks" = "Bookmarks";
 "tab_history"   = "History";
 
-// MARK: - Feed
-"feed_empty_title"    = "No Content Found";
-"feed_empty_subtitle" = "Try changing your filters and try again.";
+// MARK: - Feed & Sources
+"feed_empty_title"    = "No Articles Found";
+"feed_empty_subtitle" = "Try adjusting your filters.";
 "all_loaded"          = "All articles loaded.";
 "filter_active"       = "active filter";
+"source_all"          = "All Sources";
 
 // MARK: - Search
 "search_placeholder"         = "Search articles, topics or authors...";
-"search_prompt"              = "Type something to search.";
-"search_no_results_title"    = "No Results Found";
-"search_no_results_subtitle" = "Try a different search term.";
+"search_prompt"              = "Type a query to begin searching.";
+"search_no_results_title"    = "No Results";
+"search_no_results_subtitle" = "Try a different search query.";
 
 // MARK: - Bookmarks
 "bookmarks_empty_title"    = "No Bookmarks Yet";
-"bookmarks_empty_subtitle" = "Save articles you like\nand read them offline.";
+"bookmarks_empty_subtitle" = "Save articles you like\nto read offline.";
 
 // MARK: - History
 "history_empty_title"            = "Reading History Empty";
@@ -31,11 +32,19 @@
 "history_clear_confirm_message"  = "All unsaved reading history will be deleted. This cannot be undone.";
 "read_on"                        = "Read %@";
 
-// MARK: - Detail
-"detail_no_body"   = "Full content is not available for this article.";
-"open_in_browser"  = "Open in Browser";
-"view_original"    = "View original source";
-"read_time_format" = "%d min read";
+// MARK: - Detail & Translation
+"detail_no_body"          = "Full body content is not available for this article.";
+"open_in_browser"         = "Open in Browser";
+"view_original"           = "View original article";
+"read_time_format"        = "%d min read";
+"translation_active_tr"   = "Turkish Translation Active (Apple Translation)";
+"show_original"           = "Show Original";
+"translation_available"   = "Turkish translation available";
+"translate_to_tr"         = "Translate to Turkish";
+"article_in_english"      = "Article is in English";
+"language_switch"         = "Switch Language";
+"turkish"                 = "Turkish";
+"english"                 = "English";
 
 // MARK: - Filters
 "filter_title"      = "Filters";
@@ -48,7 +57,7 @@
 // MARK: - Actions
 "apply"    = "Apply";
 "cancel"   = "Cancel";
-"retry"    = "Try Again";
+"retry"    = "Retry";
 "retrying" = "Retrying...";
 
 // MARK: - Loading
@@ -71,11 +80,11 @@
 // MARK: - Errors
 "error_invalid_url"       = "Invalid URL.";
 "error_request_failed"    = "Request failed (Code: %d).";
-"error_decoding"          = "Could not parse data";
+"error_decoding"          = "Failed to process data";
 "error_no_internet"       = "No internet connection.";
 "error_timeout"           = "Request timed out.";
 "error_generic"           = "An unexpected error occurred.";
 "error_no_internet_recovery" = "Check your connection and try again.";
-"error_timeout_recovery"     = "Your connection may be slow. Try again.";
-"error_api_key_invalid"      = "Invalid API key. Check Endpoints.swift.";
-"error_generic_recovery"     = "Press the button to try again.";
+"error_timeout_recovery"     = "Your connection may be slow, please retry.";
+"error_api_key_invalid"      = "API key invalid. Check Endpoints.swift.";
+"error_generic_recovery"     = "Tap the button below to retry.";

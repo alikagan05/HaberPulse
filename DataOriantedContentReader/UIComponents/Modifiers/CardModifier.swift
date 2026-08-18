@@ -1,10 +1,5 @@
-// CardModifier.swift
-// DataOriantedContentReader
-// UIComponents → Modifiers
-
 import SwiftUI
 
-/// Kart tasarımı için tekrar kullanılabilir ViewModifier.
 struct CardModifier: ViewModifier {
     var cornerRadius: CGFloat = 16
     var shadowRadius: CGFloat = 8

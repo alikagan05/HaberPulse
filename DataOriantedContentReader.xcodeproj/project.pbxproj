@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		20809A2B30347F4500C4FC50 /* DataOriantedContentReader.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = DataOriantedContentReader.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		20809A2B30347F4500C4FC50 /* HaberPulse.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = HaberPulse.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -40,7 +40,7 @@
 		20809A2C30347F4500C4FC50 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				20809A2B30347F4500C4FC50 /* DataOriantedContentReader.app */,
+				20809A2B30347F4500C4FC50 /* HaberPulse.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -48,9 +48,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		20809A2A30347F4500C4FC50 /* DataOriantedContentReader */ = {
+		20809A2A30347F4500C4FC50 /* HaberPulse */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 20809A3B30347F4700C4FC50 /* Build configuration list for PBXNativeTarget "DataOriantedContentReader" */;
+			buildConfigurationList = 20809A3B30347F4700C4FC50 /* Build configuration list for PBXNativeTarget "HaberPulse" */;
 			buildPhases = (
 				20809A2730347F4500C4FC50 /* Sources */,
 				20809A2830347F4500C4FC50 /* Frameworks */,
@@ -63,11 +63,11 @@
 			fileSystemSynchronizedGroups = (
 				20809A2D30347F4500C4FC50 /* DataOriantedContentReader */,
 			);
-			name = DataOriantedContentReader;
+			name = HaberPulse;
 			packageProductDependencies = (
 			);
-			productName = DataOriantedContentReader;
-			productReference = 20809A2B30347F4500C4FC50 /* DataOriantedContentReader.app */;
+			productName = HaberPulse;
+			productReference = 20809A2B30347F4500C4FC50 /* HaberPulse.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -85,7 +85,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 20809A2630347F4500C4FC50 /* Build configuration list for PBXProject "DataOriantedContentReader" */;
+			buildConfigurationList = 20809A2630347F4500C4FC50 /* Build configuration list for PBXProject "HaberPulse" */;
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -100,7 +100,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				20809A2A30347F4500C4FC50 /* DataOriantedContentReader */,
+				20809A2A30347F4500C4FC50 /* HaberPulse */,
 			);
 		};
 /* End PBXProject section */
@@ -264,8 +264,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "-.gun.DataOriantedContentReader";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_KEY_CFBundleDisplayName = HaberPulse;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.alikagan.HaberPulse";
+				PRODUCT_NAME = HaberPulse;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -294,8 +295,9 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = "-.gun.DataOriantedContentReader";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				INFOPLIST_KEY_CFBundleDisplayName = HaberPulse;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.alikagan.HaberPulse";
+				PRODUCT_NAME = HaberPulse;
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -308,7 +310,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		20809A2630347F4500C4FC50 /* Build configuration list for PBXProject "DataOriantedContentReader" */ = {
+		20809A2630347F4500C4FC50 /* Build configuration list for PBXProject "HaberPulse" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				20809A3930347F4700C4FC50 /* Debug */,
@@ -317,7 +319,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		20809A3B30347F4700C4FC50 /* Build configuration list for PBXNativeTarget "DataOriantedContentReader" */ = {
+		20809A3B30347F4700C4FC50 /* Build configuration list for PBXNativeTarget "HaberPulse" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				20809A3C30347F4700C4FC50 /* Debug */,

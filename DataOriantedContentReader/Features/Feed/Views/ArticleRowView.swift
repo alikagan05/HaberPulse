@@ -1,18 +1,19 @@
-// ArticleRowView.swift
-// DataOriantedContentReader
-// Features → Feed → Views
-
 import SwiftUI
 
-/// Daha kompakt, yatay düzende makale satırı (liste için).
 struct ArticleRowView: View {
     let article: Article
     var isBookmarked: Bool = false
     var onBookmark: (() -> Void)? = nil
 
+    var displayTitle: String {
+        if LanguageManager.shared.isTurkish, let translated = article.translatedTitle, !translated.isEmpty {
+            return translated
+        }
+        return article.webTitle
+    }
+
     var body: some View {
         HStack(alignment: .top, spacing: 12) {
-            // Thumbnail
             AsyncImage(url: article.thumbnailURL) { phase in
                 switch phase {
                 case .success(let image):
@@ -34,9 +35,16 @@ struct ArticleRowView: View {
             .frame(width: 90, height: 70)
             .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
 
-            // Text content
             VStack(alignment: .leading, spacing: 5) {
-                HStack {
+                HStack(spacing: 5) {
+                    Text(article.sourceName)
+                        .font(.system(size: 10, weight: .bold))
+                        .padding(.horizontal, 6)
+                        .padding(.vertical, 2)
+                        .background(Color.brandPrimary.opacity(0.12))
+                        .foregroundStyle(Color.brandPrimary)
+                        .clipShape(Capsule())
+
                     SectionBadge(name: article.sectionName)
                     Spacer()
                     Text(article.webPublicationDate.relativeFormatted)
@@ -44,7 +52,7 @@ struct ArticleRowView: View {
                         .foregroundStyle(.tertiary)
                 }
 
-                Text(article.webTitle)
+                Text(displayTitle)
                     .font(.subheadline.weight(.semibold))
                     .foregroundStyle(.primary)
                     .lineLimit(2)

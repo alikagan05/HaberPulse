@@ -1,7 +1,3 @@
-// ErrorView.swift
-// DataOriantedContentReader
-// UIComponents
-
 import SwiftUI
 
 struct ErrorView: View {

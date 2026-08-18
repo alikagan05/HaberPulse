@@ -1,13 +1,8 @@
-// PersistenceTests.swift
-// DataOriantedContentReaderTests
-
 import XCTest
 import CoreData
-@testable import DataOriantedContentReader
+@testable import HaberPulse
 
 final class PersistenceTests: XCTestCase {
-
-    // MARK: - Setup
     private var persistence: PersistenceController!
 
     override func setUpWithError() throws {
@@ -18,8 +13,6 @@ final class PersistenceTests: XCTestCase {
         persistence = nil
     }
 
-    // MARK: - Helpers
-
     private func makeArticle(id: String = "test/\(UUID().uuidString)") -> Article {
         Article(
             apiId: id,
@@ -27,11 +20,11 @@ final class PersistenceTests: XCTestCase {
             webUrl: "https://theguardian.com/\(id)",
             sectionName: "technology",
             webPublicationDate: Date(),
-            fields: ArticleFields(bodyText: "Body text", thumbnail: nil, trailText: "Trail", byline: "Author")
+            fields: ArticleFields(bodyText: "Body text", thumbnail: nil, trailText: "Trail", byline: "Author"),
+            sourceName: "The Guardian",
+            isTurkish: false
         )
     }
-
-    // MARK: - Tests
 
     func test_bookmark_toggle_addsBookmark() {
         let article = makeArticle()
@@ -46,7 +39,7 @@ final class PersistenceTests: XCTestCase {
         persistence.toggleBookmark(for: article)
         XCTAssertTrue(persistence.isBookmarked(apiId: article.apiId))
 
-        persistence.toggleBookmark(for: article) // unbookmark (no read history)
+        persistence.toggleBookmark(for: article)
         XCTAssertFalse(persistence.isBookmarked(apiId: article.apiId))
     }
 
@@ -67,17 +60,15 @@ final class PersistenceTests: XCTestCase {
 
         persistence.markAsRead(article: article1)
         persistence.markAsRead(article: article2)
-        persistence.toggleBookmark(for: article2) // bookmark article2
+        persistence.toggleBookmark(for: article2)
 
         persistence.clearHistory()
 
-        // article1 should be gone
         let req1 = SavedArticle.fetchRequest()
         req1.predicate = NSPredicate(format: "apiId == %@", article1.apiId)
         let count1 = (try? persistence.container.viewContext.count(for: req1)) ?? 0
-        XCTAssertEqual(count1, 0, "Non-bookmarked read article should be removed from history")
+        XCTAssertEqual(count1, 0)
 
-        // article2 should still exist (bookmarked)
         XCTAssertTrue(persistence.isBookmarked(apiId: article2.apiId))
     }
 
@@ -104,5 +95,16 @@ final class PersistenceTests: XCTestCase {
         XCTAssertNotNil(restored)
         XCTAssertEqual(restored?.apiId, original.apiId)
         XCTAssertEqual(restored?.webTitle, original.webTitle)
+    }
+
+    func test_saveTranslation_persistsTranslation() {
+        let article = makeArticle(id: "test/trans")
+        persistence.saveTranslation(for: article, translatedTitle: "Türkçe Başlık", translatedBody: "Türkçe Gövde")
+
+        let req = SavedArticle.fetchRequest()
+        req.predicate = NSPredicate(format: "apiId == %@", article.apiId)
+        let results = try? persistence.container.viewContext.fetch(req)
+        XCTAssertEqual(results?.first?.translatedTitle, "Türkçe Başlık")
+        XCTAssertEqual(results?.first?.translatedBody, "Türkçe Gövde")
     }
 }

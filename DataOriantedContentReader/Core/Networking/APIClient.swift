@@ -1,30 +1,18 @@
-// APIClient.swift
-// DataOriantedContentReader
-// Core → Networking
-
 import Foundation
-import OSLog   // ← açık import: SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY için gerekli
+import OSLog
 
-/// Generic async/await network client. Thread-safe via `actor`.
 actor APIClient {
-
-    // MARK: - Singleton
     static let shared = APIClient()
 
-    // MARK: - Private Properties
     private let session: URLSession
     private let decoder: JSONDecoder
 
-    // MARK: - Init
     init(session: URLSession = .shared) {
         self.session = session
         self.decoder = JSONDecoder()
         self.decoder.dateDecodingStrategy = .iso8601
     }
 
-    // MARK: - Public API
-
-    /// Fetches and decodes any `Decodable` type from a given URL.
     func fetch<T: Decodable>(_ url: URL) async throws -> T {
         AppLogger.network.info("→ GET \(url.absoluteString)")
 

@@ -1,21 +1,13 @@
-// PersistenceController.swift
-// DataOriantedContentReader
-// Core → Storage
-
 import CoreData
 import OSLog
 
 final class PersistenceController {
-
-    // MARK: - Singleton
     static let shared = PersistenceController()
 
-    // MARK: - Preview
     @MainActor
     static let preview: PersistenceController = {
         let controller = PersistenceController(inMemory: true)
         let ctx = controller.container.viewContext
-        // Insert sample data for previews
         let sample = SavedArticle(context: ctx)
         sample.apiId         = "preview/article/1"
         sample.title         = "SwiftUI ile Modern iOS Geliştirme"
@@ -26,14 +18,14 @@ final class PersistenceController {
         sample.savedAt       = Date()
         sample.isBookmarked  = true
         sample.estimatedReadTime = 4
+        sample.sourceName    = "The Guardian"
+        sample.translatedTitle = "Modern iOS Development with SwiftUI"
         try? ctx.save()
         return controller
     }()
 
-    // MARK: - Container
     let container: NSPersistentContainer
 
-    // MARK: - Init
     init(inMemory: Bool = false) {
         container = NSPersistentContainer(name: "DataOriantedContentReader")
         if inMemory {
@@ -42,7 +34,6 @@ final class PersistenceController {
         container.loadPersistentStores { _, error in
             if let error {
                 AppLogger.storage.critical("Core Data load failed: \(error.localizedDescription)")
-                // In production, handle gracefully rather than crashing
                 fatalError("Core Data store failed to load: \(error)")
             }
         }
@@ -50,7 +41,6 @@ final class PersistenceController {
         container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
     }
 
-    // MARK: - Save
     func save() {
         let ctx = container.viewContext
         guard ctx.hasChanges else { return }
@@ -61,8 +51,6 @@ final class PersistenceController {
             AppLogger.storage.error("Save failed: \(error.localizedDescription)")
         }
     }
-
-    // MARK: - Bookmark helpers
 
     func isBookmarked(apiId: String) -> Bool {
         let req = SavedArticle.fetchRequest()
@@ -79,7 +67,6 @@ final class PersistenceController {
 
         if let existing = (try? ctx.fetch(req))?.first {
             if existing.isBookmarked {
-                // Unbookmark: keep for history if read, else delete
                 if existing.readAt != nil {
                     existing.isBookmarked = false
                 } else {
@@ -112,6 +99,25 @@ final class PersistenceController {
             saved.readAt       = Date()
             saved.isBookmarked = false
         }
+        save()
+    }
+
+    func saveTranslation(for article: Article, translatedTitle: String?, translatedBody: String?) {
+        let ctx = container.viewContext
+        let req = SavedArticle.fetchRequest()
+        req.predicate = NSPredicate(format: "apiId == %@", article.apiId)
+        req.fetchLimit = 1
+
+        let target: SavedArticle
+        if let existing = (try? ctx.fetch(req))?.first {
+            target = existing
+        } else {
+            target = SavedArticle(context: ctx)
+            target.populate(from: article)
+            target.savedAt = Date()
+        }
+        target.translatedTitle = translatedTitle
+        target.translatedBody  = translatedBody
         save()
     }
 

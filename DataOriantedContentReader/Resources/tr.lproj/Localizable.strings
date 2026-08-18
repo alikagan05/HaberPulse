@@ -7,11 +7,12 @@
 "tab_bookmarks" = "Kaydedilenler";
 "tab_history"   = "Geçmiş";
 
-// MARK: - Feed
+// MARK: - Feed & Sources
 "feed_empty_title"    = "İçerik Bulunamadı";
 "feed_empty_subtitle" = "Filtrelerinizi değiştirip tekrar deneyin.";
 "all_loaded"          = "Tüm makaleler yüklendi.";
 "filter_active"       = "aktif filtre";
+"source_all"          = "Tüm Kaynaklar";
 
 // MARK: - Search
 "search_placeholder"         = "Makale, konu veya yazar ara...";
@@ -31,11 +32,19 @@
 "history_clear_confirm_message"  = "Kaydedilmemiş tüm okuma geçmişi silinecek. Bu işlem geri alınamaz.";
 "read_on"                        = "%@ okundu";
 
-// MARK: - Detail
-"detail_no_body"   = "Bu makalenin tam içeriği mevcut değil.";
-"open_in_browser"  = "Tarayıcıda Aç";
-"view_original"    = "Orijinal kaynağa git";
-"read_time_format" = "%d dakika okuma";
+// MARK: - Detail & Translation
+"detail_no_body"          = "Bu makalenin tam içeriği mevcut değil.";
+"open_in_browser"         = "Tarayıcıda Aç";
+"view_original"           = "Orijinal kaynağa git";
+"read_time_format"        = "%d dakika okuma";
+"translation_active_tr"   = "Türkçe Çeviri Aktif (Apple Translation)";
+"show_original"           = "Orijinal Dili Göster";
+"translation_available"   = "Türkçe çeviri mevcut";
+"translate_to_tr"         = "Türkçe'ye Çevir";
+"article_in_english"      = "Haber orijinal olarak İngilizce";
+"language_switch"         = "Dil Değiştir";
+"turkish"                 = "Türkçe";
+"english"                 = "İngilizce";
 
 // MARK: - Filters
 "filter_title"      = "Filtreler";
