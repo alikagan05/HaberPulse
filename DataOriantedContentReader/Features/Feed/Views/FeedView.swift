@@ -140,8 +140,4 @@ struct FeedView: View {
 
 #Preview {
     FeedView()
-        .environmentObject(AppEnvironment(
-            apiClient: .shared,
-            persistence: .preview
-        ))
 }

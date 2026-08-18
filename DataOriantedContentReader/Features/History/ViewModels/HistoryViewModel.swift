@@ -3,8 +3,9 @@
 // Features → History → ViewModels
 
 import Foundation
-import Combine    // ← SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY için gerekli
+import Combine
 import CoreData
+import OSLog   // ← SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY için açık import
 
 @MainActor
 final class HistoryViewModel: ObservableObject {
