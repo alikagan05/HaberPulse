@@ -1,0 +1,81 @@
+/* Localizable.strings — Türkçe (tr)
+   DataOriantedContentReader */
+
+// MARK: - Tabs
+"tab_feed"      = "Akış";
+"tab_search"    = "Ara";
+"tab_bookmarks" = "Kaydedilenler";
+"tab_history"   = "Geçmiş";
+
+// MARK: - Feed
+"feed_empty_title"    = "İçerik Bulunamadı";
+"feed_empty_subtitle" = "Filtrelerinizi değiştirip tekrar deneyin.";
+"all_loaded"          = "Tüm makaleler yüklendi.";
+"filter_active"       = "aktif filtre";
+
+// MARK: - Search
+"search_placeholder"         = "Makale, konu veya yazar ara...";
+"search_prompt"              = "Aramak istediğiniz konuyu yazın.";
+"search_no_results_title"    = "Sonuç Bulunamadı";
+"search_no_results_subtitle" = "Farklı bir arama terimi deneyin.";
+
+// MARK: - Bookmarks
+"bookmarks_empty_title"    = "Henüz Kayıt Yok";
+"bookmarks_empty_subtitle" = "Beğendiğin makaleleri kaydet,\nçevrimdışıyken oku.";
+
+// MARK: - History
+"history_empty_title"            = "Okuma Geçmişi Boş";
+"history_empty_subtitle"         = "Okuduğun makaleler burada görünecek.";
+"history_clear"                  = "Geçmişi Temizle";
+"history_clear_confirm_title"    = "Geçmişi Temizle";
+"history_clear_confirm_message"  = "Kaydedilmemiş tüm okuma geçmişi silinecek. Bu işlem geri alınamaz.";
+"read_on"                        = "%@ okundu";
+
+// MARK: - Detail
+"detail_no_body"   = "Bu makalenin tam içeriği mevcut değil.";
+"open_in_browser"  = "Tarayıcıda Aç";
+"view_original"    = "Orijinal kaynağa git";
+"read_time_format" = "%d dakika okuma";
+
+// MARK: - Filters
+"filter_title"      = "Filtreler";
+"filter_section"    = "Kategori";
+"filter_date_range" = "Tarih Aralığı";
+"filter_from_date"  = "Başlangıç tarihi";
+"filter_to_date"    = "Bitiş tarihi";
+"filter_reset"      = "Filtreleri Sıfırla";
+
+// MARK: - Actions
+"apply"    = "Uygula";
+"cancel"   = "İptal";
+"retry"    = "Tekrar Dene";
+"retrying" = "Deneniyor...";
+
+// MARK: - Loading
+"loading"      = "Yükleniyor...";
+"loading_more" = "Daha fazla yükleniyor...";
+
+// MARK: - Sections
+"all"         = "Tümü";
+"world"       = "Dünya";
+"technology"  = "Teknoloji";
+"science"     = "Bilim";
+"business"    = "İş Dünyası";
+"sport"       = "Spor";
+"culture"     = "Kültür";
+"environment" = "Çevre";
+"politics"    = "Politika";
+"health"      = "Sağlık";
+"education"   = "Eğitim";
+
+// MARK: - Errors
+"error_invalid_url"       = "Geçersiz URL.";
+"error_request_failed"    = "İstek başarısız oldu (Kod: %d).";
+"error_decoding"          = "Veri işlenemedi";
+"error_no_internet"       = "İnternet bağlantısı yok.";
+"error_timeout"           = "İstek zaman aşımına uğradı.";
+"error_generic"           = "Beklenmedik bir hata oluştu.";
+"error_no_internet_recovery" = "Bağlantını kontrol edip tekrar dene.";
+"error_timeout_recovery"     = "Bağlantın yavaş olabilir, tekrar dene.";
+"error_api_key_invalid"      = "API anahtarı geçersiz. Endpoints.swift dosyasını kontrol et.";
+"error_generic_recovery"     = "Tekrar denemek için butona bas.";

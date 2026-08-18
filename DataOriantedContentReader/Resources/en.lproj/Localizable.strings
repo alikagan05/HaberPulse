@@ -1,0 +1,81 @@
+/* Localizable.strings — English (en)
+   DataOriantedContentReader */
+
+// MARK: - Tabs
+"tab_feed"      = "Feed";
+"tab_search"    = "Search";
+"tab_bookmarks" = "Bookmarks";
+"tab_history"   = "History";
+
+// MARK: - Feed
+"feed_empty_title"    = "No Content Found";
+"feed_empty_subtitle" = "Try changing your filters and try again.";
+"all_loaded"          = "All articles loaded.";
+"filter_active"       = "active filter";
+
+// MARK: - Search
+"search_placeholder"         = "Search articles, topics or authors...";
+"search_prompt"              = "Type something to search.";
+"search_no_results_title"    = "No Results Found";
+"search_no_results_subtitle" = "Try a different search term.";
+
+// MARK: - Bookmarks
+"bookmarks_empty_title"    = "No Bookmarks Yet";
+"bookmarks_empty_subtitle" = "Save articles you like\nand read them offline.";
+
+// MARK: - History
+"history_empty_title"            = "Reading History Empty";
+"history_empty_subtitle"         = "Articles you read will appear here.";
+"history_clear"                  = "Clear History";
+"history_clear_confirm_title"    = "Clear History";
+"history_clear_confirm_message"  = "All unsaved reading history will be deleted. This cannot be undone.";
+"read_on"                        = "Read %@";
+
+// MARK: - Detail
+"detail_no_body"   = "Full content is not available for this article.";
+"open_in_browser"  = "Open in Browser";
+"view_original"    = "View original source";
+"read_time_format" = "%d min read";
+
+// MARK: - Filters
+"filter_title"      = "Filters";
+"filter_section"    = "Section";
+"filter_date_range" = "Date Range";
+"filter_from_date"  = "From date";
+"filter_to_date"    = "To date";
+"filter_reset"      = "Reset Filters";
+
+// MARK: - Actions
+"apply"    = "Apply";
+"cancel"   = "Cancel";
+"retry"    = "Try Again";
+"retrying" = "Retrying...";
+
+// MARK: - Loading
+"loading"      = "Loading...";
+"loading_more" = "Loading more...";
+
+// MARK: - Sections
+"all"         = "All";
+"world"       = "World";
+"technology"  = "Technology";
+"science"     = "Science";
+"business"    = "Business";
+"sport"       = "Sport";
+"culture"     = "Culture";
+"environment" = "Environment";
+"politics"    = "Politics";
+"health"      = "Health";
+"education"   = "Education";
+
+// MARK: - Errors
+"error_invalid_url"       = "Invalid URL.";
+"error_request_failed"    = "Request failed (Code: %d).";
+"error_decoding"          = "Could not parse data";
+"error_no_internet"       = "No internet connection.";
+"error_timeout"           = "Request timed out.";
+"error_generic"           = "An unexpected error occurred.";
+"error_no_internet_recovery" = "Check your connection and try again.";
+"error_timeout_recovery"     = "Your connection may be slow. Try again.";
+"error_api_key_invalid"      = "Invalid API key. Check Endpoints.swift.";
+"error_generic_recovery"     = "Press the button to try again.";

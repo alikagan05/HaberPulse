@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="1" systemVersion="11A491" minimumToolsVersion="Automatic" sourceLanguage="Swift" usedWithCloudKit="false" userDefinedModelVersionIdentifier="">
+    <entity name="SavedArticle" representedClassName="SavedArticle" syncable="YES" codeGenerationType="class">
+        <attribute name="apiId"            optional="NO"  attributeType="String"/>
+        <attribute name="title"            optional="NO"  attributeType="String"  defaultValueString=""/>
+        <attribute name="sectionName"      optional="NO"  attributeType="String"  defaultValueString=""/>
+        <attribute name="webURL"           optional="NO"  attributeType="String"  defaultValueString=""/>
+        <attribute name="thumbnailURL"     optional="YES" attributeType="String"/>
+        <attribute name="trailText"        optional="YES" attributeType="String"/>
+        <attribute name="byline"           optional="YES" attributeType="String"/>
+        <attribute name="bodyText"         optional="YES" attributeType="String"/>
+        <attribute name="publishedAt"      optional="NO"  attributeType="Date"    usesScalarValueType="NO"/>
+        <attribute name="savedAt"          optional="NO"  attributeType="Date"    usesScalarValueType="NO"/>
+        <attribute name="isBookmarked"     optional="NO"  attributeType="Boolean" defaultValueString="NO"  usesScalarValueType="YES"/>
+        <attribute name="readAt"           optional="YES" attributeType="Date"    usesScalarValueType="NO"/>
+        <attribute name="estimatedReadTime" optional="NO" attributeType="Integer 16" defaultValueString="1" usesScalarValueType="YES"/>
+    </entity>
+    <elements>
+        <element name="SavedArticle" positionX="-63" positionY="-18" width="128" height="230"/>
+    </elements>
+</model>

@@ -1,0 +1,46 @@
+# DataOriantedContentReader — .gitignore
+
+# ─── Gizli Dosyalar ───────────────────────────────────────────────────────────
+# API key ve diğer sırlar — asla commit etme!
+DataOriantedContentReader/App/Secrets.swift
+*.xcconfig
+!*.xcconfig.example
+
+# ─── Xcode ───────────────────────────────────────────────────────────────────
+*.xcworkspace/xcuserdata/
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+xcuserdata/
+*.moved-aside
+*.pbxuser
+!default.pbxuser
+*.mode1v3
+!default.mode1v3
+*.mode2v3
+!default.mode2v3
+*.perspectivev3
+!default.perspectivev3
+*.xccheckout
+*.xcscmblueprint
+
+# ─── Build Çıktıları ──────────────────────────────────────────────────────────
+build/
+DerivedData/
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# ─── Swift Package Manager ───────────────────────────────────────────────────
+.build/
+Packages/
+Package.resolved
+
+# ─── macOS ───────────────────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+Thumbs.db
+
+# ─── CocoaPods (kullanılmıyor ama ihtiyaç olursa) ────────────────────────────
+Pods/
+Podfile.lock
