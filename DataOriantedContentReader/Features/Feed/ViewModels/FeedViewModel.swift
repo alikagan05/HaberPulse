@@ -28,14 +28,15 @@ final class FeedViewModel: ObservableObject {
     private let persistence: PersistenceController
 
     // MARK: - Init
-    init(env: AppEnvironment = .shared) {
-        self.apiClient   = env.apiClient
-        self.persistence = env.persistence
+    // AppEnvironment.shared'a doğrudan erişim: ViewModel @MainActor,
+    // AppEnvironment nonisolated(unsafe) — erişim güvenli.
+    init() {
+        self.apiClient   = AppEnvironment.shared.apiClient
+        self.persistence = AppEnvironment.shared.persistence
     }
 
     // MARK: - Public Methods
 
-    /// İlk sayfayı veya filtre değişikliğinde yeniden yükle.
     func loadFeed() async {
         guard !isLoading else { return }
         isLoading    = true
@@ -61,13 +62,11 @@ final class FeedViewModel: ObservableObject {
             AppLogger.viewModel.info("Feed loaded: \(self.articles.count) articles, \(self.totalPages) pages")
         } catch let netError as NetworkError {
             error = netError
-            AppLogger.viewModel.error("Feed error: \(netError.localizedDescription ?? "")")
         } catch {
             self.error = .unknown(error.localizedDescription)
         }
     }
 
-    /// Sonsuz kaydırma: bir sonraki sayfayı yükle.
     func loadMore() async {
         guard canLoadMore, !isLoadingMore else { return }
         isLoadingMore = true
@@ -85,7 +84,6 @@ final class FeedViewModel: ObservableObject {
             let response: GuardianResponse = try await apiClient.fetch(url)
             articles += response.response.results
             currentPage = nextPage
-            AppLogger.viewModel.info("Loaded page \(nextPage)/\(self.totalPages)")
         } catch let netError as NetworkError {
             error = netError
         } catch {
@@ -93,19 +91,16 @@ final class FeedViewModel: ObservableObject {
         }
     }
 
-    /// Filtre sıfırla.
     func resetFilters() {
         selectedSection = ""
         fromDate        = nil
         toDate          = nil
     }
 
-    /// Makale görüntülendiğinde okuma geçmişine kaydet.
     func recordRead(article: Article) {
         persistence.markAsRead(article: article)
     }
 
-    /// Bookmark toggle.
     func toggleBookmark(article: Article) {
         persistence.toggleBookmark(for: article)
     }

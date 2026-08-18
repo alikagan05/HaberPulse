@@ -7,15 +7,16 @@ import SwiftUI
 @main
 struct DataOriantedContentReaderApp: App {
 
-    // MARK: - Dependencies
-    private let env = AppEnvironment.shared
-
     // MARK: - Body
     var body: some Scene {
         WindowGroup {
             RootTabView()
-                .environmentObject(env)
-                .environment(\.managedObjectContext, env.persistence.container.viewContext)
+                // AppEnvironment.shared.persistence — nonisolated(unsafe) static let,
+                // her context'ten güvenle erişilir.
+                .environment(
+                    \.managedObjectContext,
+                     AppEnvironment.shared.persistence.container.viewContext
+                )
         }
     }
 }

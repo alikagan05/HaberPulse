@@ -3,6 +3,7 @@
 // Core → Networking
 
 import Foundation
+import Combine   // ← SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY için açık import
 
 enum NetworkError: LocalizedError, Equatable {
     case invalidURL

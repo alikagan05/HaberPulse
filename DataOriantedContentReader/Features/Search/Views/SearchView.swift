@@ -56,7 +56,7 @@ struct SearchView: View {
                         }
                     } label: {
                         Text(NSLocalizedString(section.label, comment: ""))
-                            .font(.caption.weight(vm.selectedSection == section.id ? .semibold : .regular))
+                            .font(Font.caption.weight(vm.selectedSection == section.id ? .semibold : .regular))
                             .padding(.horizontal, 12)
                             .padding(.vertical, 6)
                             .background(

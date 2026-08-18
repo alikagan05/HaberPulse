@@ -28,9 +28,9 @@ final class SearchViewModel: ObservableObject {
     private let persistence: PersistenceController
 
     // MARK: - Init
-    init(env: AppEnvironment = .shared) {
-        self.apiClient   = env.apiClient
-        self.persistence = env.persistence
+    init() {
+        self.apiClient   = AppEnvironment.shared.apiClient
+        self.persistence = AppEnvironment.shared.persistence
     }
 
     // MARK: - Public Methods
@@ -42,7 +42,7 @@ final class SearchViewModel: ObservableObject {
             return
         }
         searchTask = Task {
-            try? await Task.sleep(for: .milliseconds(400)) // debounce
+            try? await Task.sleep(for: .milliseconds(400))
             guard !Task.isCancelled else { return }
             await search()
         }

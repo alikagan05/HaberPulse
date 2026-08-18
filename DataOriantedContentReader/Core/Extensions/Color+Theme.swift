@@ -5,19 +5,12 @@
 import SwiftUI
 
 extension Color {
-    // MARK: - Brand Colors
-    static let brandPrimary   = Color("BrandPrimary")   // Assets.xcassets'tan
-    static let brandSecondary = Color("BrandSecondary")
-
-    // MARK: - Semantic
-    static let backgroundPrimary   = Color("BackgroundPrimary")
-    static let backgroundSecondary = Color("BackgroundSecondary")
-    static let textPrimary         = Color("TextPrimary")
-    static let textSecondary       = Color("TextSecondary")
-    static let cardBackground      = Color("CardBackground")
-    static let divider             = Color("Divider")
-
     // MARK: - Section Badge Colors
+    // Not: brandPrimary ve brandSecondary, Assets.xcassets'ten
+    // ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS=YES
+    // tarafından otomatik üretildiği için burada tanımlanmıyor (redeclaration hatası).
+    // Color.brandPrimary doğrudan kullanılabilir.
+
     static func sectionColor(_ section: String) -> Color {
         switch section.lowercased() {
         case "technology":   return Color(hue: 0.60, saturation: 0.7, brightness: 0.85)

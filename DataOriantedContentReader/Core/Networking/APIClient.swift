@@ -3,6 +3,7 @@
 // Core → Networking
 
 import Foundation
+import OSLog   // ← açık import: SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY için gerekli
 
 /// Generic async/await network client. Thread-safe via `actor`.
 actor APIClient {

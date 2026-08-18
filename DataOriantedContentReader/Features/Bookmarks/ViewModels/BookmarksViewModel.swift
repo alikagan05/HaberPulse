@@ -3,6 +3,7 @@
 // Features → Bookmarks → ViewModels
 
 import Foundation
+import Combine    // ← SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY için gerekli
 import CoreData
 
 @MainActor
@@ -15,8 +16,8 @@ final class BookmarksViewModel: ObservableObject {
     private let persistence: PersistenceController
 
     // MARK: - Init
-    init(env: AppEnvironment = .shared) {
-        self.persistence = env.persistence
+    init() {
+        self.persistence = AppEnvironment.shared.persistence
     }
 
     // MARK: - Public Methods

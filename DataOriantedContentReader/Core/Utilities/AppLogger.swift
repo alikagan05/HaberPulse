@@ -5,10 +5,10 @@
 import OSLog
 
 enum AppLogger {
-    private static let subsystem = Bundle.main.bundleIdentifier ?? "com.app.DataOriantedContentReader"
-
-    static let network   = Logger(subsystem: subsystem, category: "Network")
-    static let storage   = Logger(subsystem: subsystem, category: "Storage")
-    static let viewModel = Logger(subsystem: subsystem, category: "ViewModel")
-    static let general   = Logger(subsystem: subsystem, category: "General")
+    // nonisolated(unsafe): SWIFT_DEFAULT_ACTOR_ISOLATION=MainActor build ayarını bypass eder.
+    // static let güvenli (bir kez init edilir), unsafe erişim riski yok.
+    nonisolated(unsafe) static let network   = Logger(subsystem: "DataOriantedContentReader", category: "Network")
+    nonisolated(unsafe) static let storage   = Logger(subsystem: "DataOriantedContentReader", category: "Storage")
+    nonisolated(unsafe) static let viewModel = Logger(subsystem: "DataOriantedContentReader", category: "ViewModel")
+    nonisolated(unsafe) static let general   = Logger(subsystem: "DataOriantedContentReader", category: "General")
 }

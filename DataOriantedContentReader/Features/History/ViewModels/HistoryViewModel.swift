@@ -3,6 +3,7 @@
 // Features → History → ViewModels
 
 import Foundation
+import Combine    // ← SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY için gerekli
 import CoreData
 
 @MainActor
@@ -16,8 +17,8 @@ final class HistoryViewModel: ObservableObject {
     private let persistence: PersistenceController
 
     // MARK: - Init
-    init(env: AppEnvironment = .shared) {
-        self.persistence = env.persistence
+    init() {
+        self.persistence = AppEnvironment.shared.persistence
     }
 
     // MARK: - Public Methods
@@ -38,7 +39,6 @@ final class HistoryViewModel: ObservableObject {
         }
     }
 
-    /// Makale ne zaman okundu?
     func readDate(for article: Article) -> Date? {
         let req = SavedArticle.fetchRequest()
         req.predicate = NSPredicate(format: "apiId == %@", article.apiId)

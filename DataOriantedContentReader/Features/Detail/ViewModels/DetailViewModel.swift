@@ -3,6 +3,7 @@
 // Features → Detail → ViewModels
 
 import Foundation
+import Combine
 
 @MainActor
 final class DetailViewModel: ObservableObject {
@@ -17,10 +18,10 @@ final class DetailViewModel: ObservableObject {
     private let persistence: PersistenceController
 
     // MARK: - Init
-    init(article: Article, env: AppEnvironment = .shared) {
+    init(article: Article) {
         self.article     = article
-        self.persistence = env.persistence
-        self.isBookmarked = persistence.isBookmarked(apiId: article.apiId)
+        self.persistence = AppEnvironment.shared.persistence
+        self.isBookmarked = AppEnvironment.shared.persistence.isBookmarked(apiId: article.apiId)
     }
 
     // MARK: - Public Methods
@@ -35,7 +36,7 @@ final class DetailViewModel: ObservableObject {
         isBookmarked = persistence.isBookmarked(apiId: article.apiId)
     }
 
-    var shareItems: [Any] {
-        [article.webTitle, URL(string: article.webUrl) as Any].compactMap { $0 }
+    var shareURL: URL {
+        URL(string: article.webUrl) ?? URL(string: "https://theguardian.com")!
     }
 }
